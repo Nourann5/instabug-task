@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: instabug-container
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           env:
             - name: MYSQL_HOST
               value: "db"

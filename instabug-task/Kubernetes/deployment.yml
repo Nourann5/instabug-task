@@ -53,4 +53,4 @@ spec:
           service:
             name: instabug-service
             port: 
-              number: 80
+              number: 9090
