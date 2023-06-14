@@ -33,29 +33,18 @@ pipeline {
             }
         }
     }
-    post {
-           always {
-               script {
-         def buildStatus = currentBuild.result
-                   def buildNumber = currentBuild.number
-                   def buildUrl = "${env.BUILD_URL}"
-                   def buildCommit = "${env.GIT_COMMIT}"
-                   if (buildStatus == 'SUCCESS') {
-                       slackSend(
-                           channel: '#project', 
-                           message: "Build ${buildNumber} succeeded! \n" +
-                                    "Build URL: ${buildUrl}"
-                       )
-                   } else {
-                       slackSend(
-                           channel: '#project', 
-                           message: "Build ${buildNumber} failed! \n" +
-                                    "Build URL: ${buildUrl}"
-                       )
-                   }
+     post {
+        success {
+            echo 'Build succeeded!'
+            slackSend(channel: '#project', color: 'danger', message: "Build succeeded! Job: ${env.JOB_NAME} - Build Number: ${env.BUILD_NUMBER}")
 
-               }
-
-           }
-       }
+        }
+        
+        failure {
+            echo 'Build failed!'
+            
+            // Send Slack notification on failure
+            slackSend(channel: '#project', color: 'danger', message: "Build failed! Job: ${env.JOB_NAME} - Build Number: ${env.BUILD_NUMBER}")
+        }
+     }
 }
