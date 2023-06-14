@@ -1,0 +1,24 @@
+# Values for instabug.
+replicaCount: 1
+mysql:
+  password: nouran
+image:
+  repository: nouranahmed5/instabug-app-task
+  tag: "2"    # Overrides the image tag whose default is the chart appVersion.
+  env: 
+    username: root
+    password: nouran
+service:
+  port: 9090
+
+ingress:
+  enabled: True 
+  name: instabug-ingress
+  port: 9090      
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80

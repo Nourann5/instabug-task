@@ -1,0 +1,21 @@
+version: '3'
+services:
+  taskapp:
+     image: nouranahmed5/instabug-app-task:1
+     container_name: instabugtask
+     environment:
+       - MYSQL_HOST=db
+       - MYSQL_USER=root
+       - MYSQL_PASS=nouran
+       - MYSQL_PORT=3306
+     depends_on:
+       - db
+     ports:
+       - "9090:9090"
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=nouran
+    volumes:
+      - /data/instabug-task1/:/var/lib/mysql
+    
